@@ -1,0 +1,17 @@
+# Exclude source TypeScript — ship compiled JS in out/
+src/**
+**/*.ts
+tsconfig.json
+
+# Dev and metadata
+.vscode/**
+.git/**
+test/**
+
+# Maps and logs
+*.map
+*.log
+
+# Node modules not needed in package
+node_modules/**
+

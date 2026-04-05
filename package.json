@@ -1,0 +1,146 @@
+{
+  "name": "undo-stack",
+  "displayName": "UndoStack",
+  "description": "Record editing sessions and restore workspace state with snapshot-based undo and preview.",
+  "version": "0.1.0",
+  "publisher": "ali-097",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:session.start",
+    "onCommand:session.end",
+    "onCommand:session.undo",
+    "onCommand:session.statusActions",
+    "onCommand:session.previewFile",
+    "onCommand:session.previewSessionItem",
+    "onCommand:session.undoSessionItem",
+    "onCommand:session.deleteSessionItem",
+    "onStartupFinished",
+    "onView:sessions"
+  ],
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "sessions",
+          "name": "Sessions"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "session.start",
+        "title": "Start Session"
+      },
+      {
+        "command": "session.end",
+        "title": "End Session (Keep Changes)"
+      },
+      {
+        "command": "session.undo",
+        "title": "Undo Session"
+      },
+      {
+        "command": "session.previewFile",
+        "title": "Preview File (Session)"
+      },
+      {
+        "command": "session.undoSessionItem",
+        "title": "Undo Session (from Tree)"
+      },
+      {
+        "command": "session.previewSessionItem",
+        "title": "Preview Session"
+      },
+      {
+        "command": "session.deleteSessionItem",
+        "title": "Delete Session"
+      },
+      {
+        "command": "session.statusActions",
+        "title": "Session: Actions"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "UndoStack",
+      "properties": {
+        "session.useGit": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, use Git (read-only) to assist restoring sessions (experimental)"
+        }
+      }
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "session.start",
+          "when": "view == sessions && !session.active",
+          "group": "navigation"
+        },
+        {
+          "command": "session.end",
+          "when": "view == sessions && session.active",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "session.previewSessionItem",
+          "when": "view == sessions && viewItem == session",
+          "group": "inline"
+        },
+        {
+          "command": "session.undoSessionItem",
+          "when": "view == sessions && viewItem == session",
+          "group": "inline"
+        },
+        {
+          "command": "session.deleteSessionItem",
+          "when": "view == sessions && viewItem == session",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "main": "./out/extension.js",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ali-097/Undo-stack"
+  },
+  "keywords": [
+    "session",
+    "undo",
+    "snapshot",
+    "restore",
+    "productivity",
+    "vscode"
+  ],
+  "files": [
+    "out/**",
+    "images/**",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "diff": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0",
+    "@types/diff": "^5.0.0"
+  }
+}
