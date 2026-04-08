@@ -1,8 +1,8 @@
 {
-  "name": "undo-stack",
-  "displayName": "UndoStack",
+  "name": "undostack",
+  "displayName": "Undo-Stack",
   "description": "Record editing sessions and restore workspace state with snapshot-based undo and preview.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "ali-097",
   "license": "MIT",
   "engines": {

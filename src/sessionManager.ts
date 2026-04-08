@@ -319,6 +319,14 @@ export class SessionManager {
       }
     }
 
+    // Save any open editors modified by the undo operations so users
+    // don't have to manually save each file after undoing.
+    try {
+      await vscode.workspace.saveAll(false);
+    } catch {
+      // ignore save failures
+    }
+
     vscode.window.showInformationMessage(`Session ${sessionId} undone`);
 
     // Remove session metadata (cleanup)
